@@ -22,11 +22,11 @@ LIPSCHITZ = 1.0
 DESCRIPTION = "Reference-refined waving Jolly figurine, approximately 152 mm tall."
 SCENE = (
     ("body", "ellipsoid", (0., -13., 0.), ((40., 46., 30.),), 0.),
-    ("hood", "rounded_prism", (0., 42., 0.), ((38., 36., 32.), 26., 12.), 8.),
-    ("face", "rounded_prism", (0., 43., 27.), ((28., 21., 7.), 17.5, 2.), 1.),
+    ("hood", "rounded_prism", (0., 42., 0.), ((38., 36., 32.), 26., 12.), 20.),
+    ("face", "rounded_prism", (0., 45., 27.), ((25.2, 18.9, 7.), 15.75, 2.), 1.),
     ("left_eye", "sphere", (-14.5, 47., 33.5), (2.8,), 0.),
     ("right_eye", "sphere", (14.5, 47., 33.5), (2.8,), 0.),
-    ("smile", "torus_arc", (0., 45., 34.3), (5., .65, (-2.47, -.67)), 0.),
+    ("smile", "torus_arc", (0., 45., 34.15), (5., .5, (-2.47, -.67)), 0.),
     ("wave_upper", "capsule", (33., 15., 0.), ((47., 27., 2.), 10.), 4.),
     ("wave_forearm", "capsule", (47., 27., 2.), ((59., 39., 3.), 10.), 3.),
     ("wave_mitten", "ellipsoid", (61., 40., 3.), ((10., 11., 9.5),), 2.),

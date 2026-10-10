@@ -24,6 +24,22 @@ This is the source image supplied by the user for the Jolly refinement. Preserve
 
 The photo does not uniquely determine rear geometry, thickness, exact scale, hidden connections or tolerances. The approximately 150 mm figurine scale is a modeling choice, not a measured dimension of the photographed object. Side/back proportions are a conservative stylized interpretation. Visual comparisons are qualitative, not calibrated pixel-fitting measurements.
 
+## Framing and silhouette refinement
+
+The follow-up to the merged reference model reduces face XY half-extents from
+`(28, 21)` to `(25.2, 18.9)` mm and raises its center from Y=43 to Y=45 mm.
+This restores a visible pink band at the cheeks and below the chin while
+retaining forehead framing. Face depth and eye placement are unchanged.
+The smile's actual prior tube radius was 0.65 mm; it is now 0.5 mm, with its
+center recessed by 0.15 mm. The hood/body blend is widened from 8 to 20 mm:
+a smaller 12 mm blend still left a visible waist, so the final value also
+regresses the central front silhouette profile rather than just one point.
+
+These are design adjustments judged against the original photograph, not
+measurements recovered from it. The smooth hood/face and block feet remain
+stylized; fur, fabric, hidden depth and physical printability remain unresolved.
+Preview colors remain diagnostic, not exported STL materials.
+
 ## Reference rights
 
 The image was supplied by the user for visual-reference inclusion. Photographer and rights-holder attribution have not been supplied. This reference photograph is **not licensed by this repository's MIT code license**; its original rights are retained. Do not represent it as an original repository asset or imply ownership of the depicted character.
