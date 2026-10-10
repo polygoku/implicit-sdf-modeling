@@ -140,7 +140,7 @@ def build(model, bounds, lipschitz, output, *, resolution, width, height,
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", default="sphere", help="sphere, blended-capsules, or trusted .py file")
+    parser.add_argument("--model", default="sphere", help="sphere, blended-capsules, jolly-waving, or trusted .py file")
     parser.add_argument("--trust-model", action="store_true", help="Allow executing an inspected custom Python model")
     parser.add_argument("--output", type=Path, required=True, help="New artifact directory; never overwritten")
     parser.add_argument("--resolution", type=int, default=64, help="Grid samples per axis, 8..256")
