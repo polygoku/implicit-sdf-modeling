@@ -31,7 +31,11 @@ Each new output directory receives:
 - `model.stl`: binary STL, serialized and reopened for integrity validation.
 - `validation.json`: dimensions, triangle count, topology, sampling and stated validation limits.
 
-Output directories must be new; an existing directory is never overwritten. World coordinates are **millimeters**. STL itself does not encode units, so confirm millimeters in your slicer.
+Output directories must be new; an existing directory or file is never overwritten, even if it appears during the build. Artifacts are prepared privately, then the destination directory is exclusively reserved and each artifact is created without replacing existing files. `validation.json` is published last, only after the other artifact files have been completely copied and closed.
+
+Publication is **not an atomic directory transaction**. A late I/O error can leave an incomplete reserved output directory (and, if writing the report fails, an incomplete JSON file). Such a directory is deliberately retained to preserve unrelated files a user may have created there concurrently. Treat only a successfully completed, parseable report as readiness, inspect failed outputs, and choose a new destination for retries. This is not protection against another process deleting or modifying published artifacts, nor a crash-durability guarantee.
+
+World coordinates are **millimeters**. STL itself does not encode units, so confirm millimeters in your slicer.
 
 ## Custom models
 

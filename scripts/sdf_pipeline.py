@@ -99,7 +99,8 @@ def build(model, bounds, lipschitz, output, *, resolution, width, height,
                 model.sdf, width=width, height=height,
                 camera=center + np.asarray(direction) * distance,
                 target=center, up=up, fov_degrees=45,
-                epsilon=max(1e-5, float(np.min(pitch)) * 0.02),
+                # The renderer compares raw field values, not distances in mm.
+                epsilon=max(1e-5, float(np.min(pitch)) * 0.02) * lipschitz,
                 max_distance=distance + 2 * radius, lipschitz=lipschitz)
             if not hits.any():
                 raise ValueError(f"The {name} preview has no surface hits; inspect field/tracing bounds")
@@ -113,7 +114,20 @@ def build(model, bounds, lipschitz, output, *, resolution, width, height,
             json.dumps(report, indent=2, allow_nan=False) + "\n", encoding="utf-8")
         if output.exists():
             raise ValueError("Output directory appeared during the build; refusing replacement")
-        temporary.rename(output)
+        try:
+            # mkdir is the portable, exclusive reservation; exists() is advisory only.
+            output.mkdir()
+        except FileExistsError as exc:
+            raise ValueError("Output directory appeared during the build; refusing replacement") from exc
+        # Reserve each file exclusively too: never replace concurrent user files.
+        # Publish the readiness report last, after all other artifact files close.
+        artifacts = [f"preview_{name}.png" for name in views]
+        artifacts += ["model.stl", "model.glsl", "validation.json"]
+        for name in artifacts:
+            with (temporary / name).open("rb") as source, (output / name).open("xb") as target:
+                shutil.copyfileobj(source, target)
+        # On late I/O failure leave the reserved directory intact: deleting it could
+        # remove unrelated files created concurrently by the user.
     finally:
         if temporary.exists():
             shutil.rmtree(temporary)
