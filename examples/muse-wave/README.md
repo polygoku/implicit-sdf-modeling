@@ -1,6 +1,6 @@
 # Muse (Jolly), waving — worked example
 
-A portrait of Muse's default avatar Jolly (pink-fur variant, right hand raised
+A portrait of Muse's default avatar Jolly (pink-fur variant, left hand raised
 in a wave), built as a hand-authored GLSL signed distance function following
 this repo's skill workflow: draft `map()` from primitives → raymarch preview →
 revise → marching-cubes mesh → STL.

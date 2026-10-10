@@ -1,5 +1,5 @@
 // Muse (Jolly) — waving — a signed distance function portrait.
-// Muse's default avatar, pink-fur variant, right hand raised in a wave.
+// Muse's default avatar, pink-fur variant, left hand raised in a wave.
 // y-up, ~2.5 units tall, front faces +z.
 // Paste into a Shadertoy-style raymarcher (map() + standard march loop).
 // Fur is left to the viewer's imagination.
