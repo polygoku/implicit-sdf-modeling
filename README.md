@@ -61,6 +61,19 @@ Inspect custom code before running:
 
 **Custom Python modules execute code. `--trust-model` is not a sandbox.** The shipped examples use shared constants for their corresponding NumPy/GLSL definitions, but this pipeline does not execute the GLSL on a GPU or prove arbitrary port equivalence. Keep helpers, constants, signs, transforms, and units consistent. Use a sandbox for untrusted generated/downloaded code.
 
+## Jolly reference-backed refinement
+
+The authoritative user-supplied photo and comparison rules are in [references/jolly-reference.md](references/jolly-reference.md). Open that source before every Jolly edit; compare against the photo, not merely the previous generated model. The photo is excluded from the MIT code license and retains its original rights.
+
+```sh
+.venv/bin/python scripts/sdf_pipeline.py --model jolly-waving --output artifacts/jolly --resolution 192
+.venv/bin/python scripts/preview_jolly.py --output artifacts/jolly-shaded --size 640
+```
+
+The additional preview helper produces shaded front/side/top/three-quarter views and a source-photo comparison. It uses finite-difference NumPy normals and optional diagnostic RGB colors. It does **not** execute GLSL, put colors in STL, recover unseen rear geometry, reproduce fur, or certify physical printing. `preview.json` records source-photo and model-code hashes. Output directories must be new; failed previews may leave incomplete outputs.
+
+The smooth figurine prioritizes the photo's viewer-right wave, broad continuous hood/torso, wider rounded-rectangular face, smaller eyes and smile, hanging opposite arm and short block-like feet. Its roughly 150 mm height is a chosen scale, not a measurement of the photographed original. Review shape fidelity separately from the numerical/topology checks.
+
 ## Validation scope
 
 The pipeline checks finite scalar samples, zero-level crossing, positive domain boundaries, mesh integrity, winding, volume, connected components and STL round-trip integrity. Bounds must still be chosen to include the entire intended model: positive sampled boundaries cannot detect wholly separate objects outside the box.
