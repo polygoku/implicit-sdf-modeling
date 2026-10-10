@@ -21,7 +21,7 @@ def test_reference_pose_and_connected_wide_hood():
     assert jolly.sdf(np.array([-54., -42., 3.])) < 0
     assert jolly.sdf(np.array([-61., 40., 3.])) > 0
     assert jolly.sdf(np.array([30., 22., 0.])) < 0
-    assert jolly.sdf(np.array([25., 54., 32.])) < 0  # broad face corner
+    assert jolly.sdf(np.array([22., 54., 32.])) < 0  # scaled broad face corner
     np.testing.assert_allclose(jolly.sdf(np.array([[17, -74, 2], [20, -74, 6]])), 0,
                                atol=1e-12)
     assert jolly.sdf(np.array([0., -66., 2.])) > 0
@@ -161,15 +161,15 @@ def test_rounded_prism_rejects_invalid_center(center):
 def test_face_projection_uses_shared_soft_prisms_not_thick_visor():
     records = {record[0]: record for record in jolly.SCENE}
     assert records["hood"] == ("hood", "rounded_prism", (0., 42., 0.),
-                                ((38., 36., 32.), 26., 12.), 8.)
-    assert records["face"] == ("face", "rounded_prism", (0., 43., 27.),
-                                ((28., 21., 7.), 17.5, 2.), 1.)
-    np.testing.assert_allclose(jolly._primitive(np.array([0., 43., 34.]), records["face"]), 0)
-    np.testing.assert_allclose(jolly._primitive(np.array([0., 43., 32.]), records["hood"]), 0)
-    np.testing.assert_allclose(jolly.sdf(np.array([0., 43., 34.])), 0, atol=1e-12)
+                                ((38., 36., 32.), 26., 12.), 20.)
+    assert records["face"] == ("face", "rounded_prism", (0., 45., 27.),
+                                ((25.2, 18.9, 7.), 15.75, 2.), 1.)
+    np.testing.assert_allclose(jolly._primitive(np.array([0., 45., 34.]), records["face"]), 0)
+    np.testing.assert_allclose(jolly._primitive(np.array([0., 45., 32.]), records["hood"]), 0)
+    np.testing.assert_allclose(jolly.sdf(np.array([0., 45., 34.])), 0, atol=1e-12)
     assert records["left_eye"][2:] == ((-14.5, 47., 33.5), (2.8,), 0.)
     assert records["right_eye"][2:] == ((14.5, 47., 33.5), (2.8,), 0.)
-    assert records["smile"][2:] == ((0., 45., 34.3), (5., .65, (-2.47, -.67)), 0.)
+    assert records["smile"][2:] == ((0., 45., 34.15), (5., .5, (-2.47, -.67)), 0.)
     for name in ("hood", "face"):
         _, _, center, params, blend = records[name]
         args = ", ".join(jolly._glsl_literal(v) for v in (center, *params))
