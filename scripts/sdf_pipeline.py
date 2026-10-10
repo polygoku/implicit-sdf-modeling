@@ -23,7 +23,11 @@ sys.path.insert(0, str(ROOT))
 
 
 def load_model(name: str, trusted: bool = False):
-    builtins = {"sphere": "sphere.py", "blended-capsules": "blended_capsules.py"}
+    builtins = {
+        "sphere": "sphere.py",
+        "blended-capsules": "blended_capsules.py",
+        "jolly-waving": "jolly_waving.py",
+    }
     if name in builtins:
         path = ROOT / "examples" / builtins[name]
     else:

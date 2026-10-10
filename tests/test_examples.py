@@ -81,7 +81,7 @@ def test_glsl_helpers_guard_their_divisors():
     assert "if (k <= 0.0) return 1e20;" in source
 
 
-@pytest.mark.parametrize("name", ["sphere", "blended_capsules"])
+@pytest.mark.parametrize("name", ["sphere", "blended_capsules", "jolly_waving"])
 @pytest.mark.parametrize("points", [
     np.zeros(2), np.zeros((2, 4)), np.zeros((3, 1)), np.array(0),
     np.array([[0, np.nan, 0]]), np.array([[0, 0, np.inf]]),
@@ -107,7 +107,7 @@ def test_example_and_script_packages_are_explicit_importable_packages():
         assert not hits[0, 0]
 
 
-@pytest.mark.parametrize("name", ["sphere", "blended_capsules"])
+@pytest.mark.parametrize("name", ["sphere", "blended_capsules", "jolly_waving"])
 def test_model_is_one_bounded_component_on_sample_grid(name):
     m = model(name)
     low, high = np.asarray(m.BOUNDS)
@@ -136,7 +136,7 @@ def test_model_is_one_bounded_component_on_sample_grid(name):
     assert len(visited) == np.count_nonzero(occupied)
 
 
-@pytest.mark.parametrize("name", ["sphere", "blended_capsules"])
+@pytest.mark.parametrize("name", ["sphere", "blended_capsules", "jolly_waving"])
 def test_model_gradient_respects_declared_lipschitz_bound(name):
     m = model(name)
     points = np.random.default_rng(472).uniform(*np.asarray(m.BOUNDS), (1000, 3))
