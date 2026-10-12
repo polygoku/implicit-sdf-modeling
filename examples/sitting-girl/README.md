@@ -1,8 +1,8 @@
 # Sitting-girl figurine (image-to-3D example)
 
 A stylized 3D figurine built from a single reference photograph using this
-repo's image-to-3D skill (v0.2.0). The reference photo — described here in
-words only, not included — shows a young girl sitting on grass by the beach:
+repo's image-to-3D skill (v0.2.0). The reference photo (`reference.jpg`) shows
+a young girl sitting on grass by the beach:
 knees drawn up, arms wrapped around her shins with hands clasped, torso
 leaning back slightly, head tilted up toward the sky. White zip-up jacket,
 light pink shorts, chunky dark clogs with colorful charms, low ponytail,
